@@ -3,14 +3,14 @@
   <nav>
     <div class="nav-wrapper lime darken-1">
       <a href="#" class="brand-logo left" style="padding-top:10px; padding-left: 20px;"><img src="@/assets/logo.svg" width="40" alt=""> </a>
-      <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+      <!-- <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Villahermosa<i class="material-icons right">arrow_drop_down</i></a></li>
            <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Comalcalco<i class="material-icons right">arrow_drop_down</i></a></li>
           <li v-for="(location, index) in locations" :key="index">
             <a href="#" @click="SetMarker(location.position)">{{location.name}}</a>
           </li>
-      </ul>
+      </ul> -->
     </div>
   </nav>
 
