@@ -1,4 +1,4 @@
-# geo-ninjas
+# Vue-sokect.io and Mapbox API
 
 ## Project setup
 ```
