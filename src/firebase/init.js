@@ -2,12 +2,12 @@ import firebase from "firebase";
 import "firebase/firestore";
 
 var config = {
-  apiKey: "AIzaSyBrjrVkIschwu5h6K-ySszMeyhqKGPqUHU",
-  authDomain: "geochatvue.firebaseapp.com",
-  databaseURL: "https://geochatvue.firebaseio.com",
-  projectId: "geochatvue",
-  storageBucket: "geochatvue.appspot.com",
-  messagingSenderId: "571780472450"
+  apiKey: "AIzaSyBUQKETzsuse8gYhHmRUNwdlx64u9sFT0Y",
+  authDomain: "mapbox-location.firebaseapp.com",
+  databaseURL: "https://mapbox-location.firebaseio.com",
+  projectId: "mapbox-location",
+  storageBucket: "mapbox-location.appspot.com",
+  messagingSenderId: "522339878308"
 };
 
 const firebaseApp = firebase.initializeApp(config);

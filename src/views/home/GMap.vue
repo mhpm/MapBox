@@ -16,32 +16,33 @@ export default {
       marker: new mapboxgl.Marker(),
       myLatLng: {
         lat: 20.701461, lng:-103.374720
-      }
-      //socket : io('http://localhost:3030'),
+      },
+      socket : io('http://localhost:3030'),
     };
   },
   created() {
     this.SendMessage()
+    
   },
   methods: {
     SendMessage() {
-      //this.socket.emit('SEND_LOCATION', this.myLatLng);
+      this.socket.emit('SEND_LOCATION', this.myLatLng);
     },
     RenderMap() {
       mapboxgl.accessToken =
         "pk.eyJ1IjoibWhwbSIsImEiOiJjam5xN3N6eTYxbXF6M3BxdGF5NGRmbGh4In0.tF4waHdBIcwrVNMi21ARbg";
       this.map = new mapboxgl.Map({
         container: "map",
-        style: "mapbox://styles/mapbox/streets-v10",
-        center: this.myLatLng,
-        zoom: 14
+        style: 'mapbox://styles/mapbox/streets-v9',
+    center: [-65.017, -16.457],
+        zoom: 6
       });
 
-      this.map.addControl(new MapboxDirections({
-          accessToken: mapboxgl.accessToken
-      }), 'top-left');
+      this.LoadUsers()
 
-      
+      // this.map.addControl(new MapboxDirections({
+      //     accessToken: mapboxgl.accessToken
+      // }), 'top-left');
 
       // Add geolocate control to the map.
       // this.map.addControl(
@@ -56,15 +57,38 @@ export default {
       this.map.addControl(new mapboxgl.FullscreenControl());
       this.map.addControl(new mapboxgl.NavigationControl());
     },
+    FocusUser(position){
+      this.map.flyTo({ center: position, speed: 0.3, curve: 1 });
+    },
     SetMarker(data) {
-      this.map.flyTo({ center: data, speed: 0.3, curve: 1 });
+      //this.map.flyTo({ center: data, speed: 0.3, curve: 1 });
       // create the popup
-      let popup = new mapboxgl.Popup({ offset: 25 }).setText('You are Here!');
-
-      let el = document.createElement('div');
-      el.className = 'marker';
+      let popup = new mapboxgl.Popup({ offset: 25 }).setText('You are Here!')
 
       new mapboxgl.Marker().setLngLat(data).setPopup(popup).addTo(this.map);
+    },
+    LoadUsers(){
+      let self = this
+      console.log(this.$store.state);
+      
+      this.$store.state.Users.forEach(function(user) {
+          // create a DOM element for the marker
+          var el = document.createElement('div');
+          el.className = 'marker';
+          let random = Math.floor(Math.random() * 100);
+          el.style.backgroundImage = `url(https://randomuser.me/api/portraits/thumb/men/${random}.jpg)`;
+          el.style.width = '40px';
+          el.style.height = '40px';
+
+          el.addEventListener('click', function() {
+              window.alert(user.properties.message);
+          });
+
+          // add marker to map
+          new mapboxgl.Marker(el)
+              .setLngLat(user.geometry.coordinates)
+              .addTo(self.map);
+      });
     },
     notify () {
       // https://developer.mozilla.org/en-US/docs/Web/API/Notification/Notification#Parameters
@@ -89,6 +113,8 @@ export default {
         }
       }
       this.$notification.show(notification.title, notification.options, notification.events)
+
+      
     }
   },
   mounted() {
@@ -96,9 +122,15 @@ export default {
     
     this.RenderMap();
     
-    bus.$on("Marker", data => {
-      this.SetMarker(data);
+    // bus.$on("Marker", data => {
+    //   this.SetMarker(data);
+    // });
+
+     bus.$on("Focus", position => {
+      //this.SetMarker(data);
+      this.FocusUser(position)
     });
+
 
     // this.socket.on('LOCATION', function(data){
     //   self.SetMarker(data)
@@ -108,11 +140,29 @@ export default {
       self.map.setLayoutProperty('country-label-lg', 'text-field', ['get', 'name_es']);
     }, 500)
 
-    this.notify()
+    //this.notify()
 
-    setInterval(() => {
-      this.notify()
-    }, 10000);
+    // setInterval(() => {
+    //   this.notify()
+    // }, 10000);
+
+    // if ('serviceWorker' in navigator) {
+    //   navigator.serviceWorker.ready.then(function(reg) {
+
+    //     reg.pushManager.subscribe({
+    //       userVisibleOnly: true
+    //     }).then(function(sub) {
+    //       console.log('Endpoint URL: ', sub.endpoint);
+    //     }).catch(function(e) {
+    //       if (Notification.permission === 'denied') {
+    //         console.warn('Permission for notifications was denied');
+    //       } else {
+    //         console.error('Unable to subscribe to push', e);
+    //       }
+    //     });
+    //   })
+    // }
+
 
     // let vm = this;
     // this.map.on("click", function(e) {
@@ -123,16 +173,17 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .mapbox {
   width: 100%;
   height: 100vh;
 }
 
 .marker {
-  z-index: 9 !important;
-  width: 20px !important;
-  height: 20px !important;
-  background-color: red !important;
+    display: block;
+    border: none;
+    border-radius: 50% !important;
+    cursor: pointer;
+    padding: 0;
 }
 </style>

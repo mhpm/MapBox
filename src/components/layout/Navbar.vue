@@ -1,18 +1,5 @@
 <template>
 <div>
-  <nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="https://bulma.io">
-      <img src="@/assets/logo.svg" width="40" alt="">
-    </a>
-
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-</nav>
 
 </div>
 </template>
@@ -68,14 +55,6 @@ export default {
     };
   },
   created() {
-    // document.addEventListener("DOMContentLoaded", function() {
-    //   var elems = document.querySelectorAll(".sidenav");
-    //   var instances = M.Sidenav.init(elems);
-    // });
-    $(document).ready(function() {
-      $(".dropdown-trigger").dropdown();
-      $(".sidenav").sidenav();
-    });
   },
   methods: {
     SetMarker(position) {

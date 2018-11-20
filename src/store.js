@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-
+    Users: require("./data/Users.json")
   },
   mutations: {
 

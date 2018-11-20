@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <Navbar />
+    <SideMenu />
     <router-view />
   </div>
 </template>
 
 <script>
-import Navbar from "@/components/layout/Navbar";
+import SideMenu from "@/components/layout/SideMenu";
 export default {
   name: "App",
   components: {
-    Navbar
+    SideMenu
   },
   data() {
     return {};
@@ -22,9 +22,14 @@ export default {
 </script>
 
 <style>
-html,
-body {
-  height: 100%;
-  width: 100%;
+html, body
+{
+  margin: 0 !important;
+  padding: 0 !important;
+
+  /* make it look decent enough */
+  background: #232323;
+  color: #cdcdcd;
+  font-family: "Avenir Next", "Avenir", sans-serif;
 }
 </style>
