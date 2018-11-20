@@ -17,6 +17,7 @@
     "socket.io-client": "^2.1.1",
     "uws": "^99.0.0",
     "vue": "^2.5.17",
+    "vue-native-notification": "^1.0.5",
     "vue-router": "^3.0.1",
     "vue-socket.io": "^2.1.1-b",
     "vue-socket.io-extended": "^3.1.0",

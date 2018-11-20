@@ -1,8 +1,5 @@
 <template>
     <div>
-      <!-- <a @click="sendMessage" class="btn-floating btn-large halfway-fab waves-effect waves-light teal" style="top: 35px; right: 70px">
-        <i class="material-icons">add</i>
-      </a> -->
         <div class="mapbox" id="map"></div>
     </div>
 </template>
@@ -40,6 +37,12 @@ export default {
         zoom: 14
       });
 
+      this.map.addControl(new MapboxDirections({
+          accessToken: mapboxgl.accessToken
+      }), 'top-left');
+
+      
+
       // Add geolocate control to the map.
       // this.map.addControl(
       //   new mapboxgl.GeolocateControl({
@@ -62,18 +65,54 @@ export default {
       el.className = 'marker';
 
       new mapboxgl.Marker().setLngLat(data).setPopup(popup).addTo(this.map);
+    },
+    notify () {
+      // https://developer.mozilla.org/en-US/docs/Web/API/Notification/Notification#Parameters
+      const notification = {
+        title: 'Welcome',
+        options: {
+          body: 'This a test Notification!'
+        },
+        events: {
+          onerror: function () {
+              console.log('Custom error event was called');
+          },
+          onclick: function () {
+              console.log('Custom click event was called');
+          },
+          onclose: function () {
+              console.log('Custom close event was called');
+          },
+          onshow: function () {
+              console.log('Custom show event was called');
+          }
+        }
+      }
+      this.$notification.show(notification.title, notification.options, notification.events)
     }
   },
   mounted() {
+    let self = this
+    
     this.RenderMap();
+    
     bus.$on("Marker", data => {
       this.SetMarker(data);
     });
 
-    let self = this
     this.socket.on('LOCATION', function(data){
       self.SetMarker(data)
     });
+
+    setTimeout(() => {
+      self.map.setLayoutProperty('country-label-lg', 'text-field', ['get', 'name_es']);
+    }, 500)
+
+    this.notify()
+
+    setInterval(() => {
+      this.notify()
+    }, 10000);
 
     // let vm = this;
     // this.map.on("click", function(e) {

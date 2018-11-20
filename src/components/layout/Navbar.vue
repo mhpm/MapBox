@@ -1,42 +1,19 @@
 <template>
 <div>
-  <nav>
-    <div class="nav-wrapper lime darken-1">
-      <a href="#" class="brand-logo left" style="padding-top:10px; padding-left: 20px;"><img src="@/assets/logo.svg" width="40" alt=""> </a>
-      <!-- <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Villahermosa<i class="material-icons right">arrow_drop_down</i></a></li>
-           <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Comalcalco<i class="material-icons right">arrow_drop_down</i></a></li>
-          <li v-for="(location, index) in locations" :key="index">
-            <a href="#" @click="SetMarker(location.position)">{{location.name}}</a>
-          </li>
-      </ul> -->
-    </div>
-  </nav>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="https://bulma.io">
+      <img src="@/assets/logo.svg" width="40" alt="">
+    </a>
 
-  <ul id="dropdown1" class="dropdown-content" style="top: 55px !important; width: 185px !important; height: 255px !important;">
-    <li><a href="#" @click="SetMarker({lat: 18.002057, lng: -92.933349})">Museo de Historia</a></li>
-    <li><a href="#" @click="SetMarker({lat: 18.002047, lng: -92.934014})">Museo la Venta</a></li>
-    <li><a href="#" @click="SetMarker({lat: 18.006011, lng: -92.966004})">Museo Papagayo</a></li>
-    <li><a href="#" @click="SetMarker({lat: 18.004258, lng: -92.952388})">Parque la Choca</a></li>
-    <li><a href="#" @click="SetMarker({lat: 17.999868, lng: -92.913913})">Mercado Pinosuares</a></li>
-  </ul>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+</nav>
 
-  <ul id="dropdown2" class="dropdown-content" style="top: 55px !important; width: 185px !important; height: 255px !important;">
-    <li><a href="#" @click="SetMarker({lat: 18.279163, lng: -93.200509})">Zona Arqueológica</a></li>
-  </ul>
-
-  <ul class="sidenav" id="mobile-demo">
-    <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Villahermosa<i class="material-icons right">arrow_drop_down</i></a></li>
-    <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Comalcalco<i class="material-icons right">arrow_drop_down</i></a></li>
-    <li v-for="(location, index) in locations" :key="index">
-      <a href="#" @click="SetMarker(location.position)">{{location.name}}</a>
-    </li>
-    <div class="side-footer grey lighten-5">
-      <i class="tiny material-icons">code</i> with
-         <i class="tiny material-icons">favorite</i> by <a href="https://www.linkedin.com/in/michellepm/" target="blank">Michelle Pérez Morales</a>
-    </div>
-  </ul>
 </div>
 </template>
 
