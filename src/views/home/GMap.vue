@@ -16,8 +16,8 @@ export default {
       marker: new mapboxgl.Marker(),
       myLatLng: {
         lat: 20.701461, lng:-103.374720
-      },
-      socket : io('http://localhost:3030'),
+      }
+      //socket : io('http://localhost:3030'),
     };
   },
   created() {
@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     SendMessage() {
-      this.socket.emit('SEND_LOCATION', this.myLatLng);
+      //this.socket.emit('SEND_LOCATION', this.myLatLng);
     },
     RenderMap() {
       mapboxgl.accessToken =
@@ -100,9 +100,9 @@ export default {
       this.SetMarker(data);
     });
 
-    this.socket.on('LOCATION', function(data){
-      self.SetMarker(data)
-    });
+    // this.socket.on('LOCATION', function(data){
+    //   self.SetMarker(data)
+    // });
 
     setTimeout(() => {
       self.map.setLayoutProperty('country-label-lg', 'text-field', ['get', 'name_es']);
