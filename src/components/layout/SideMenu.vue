@@ -106,8 +106,8 @@ a:hover
   
   transform-origin: 4px 0px;
   
-  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+  transition: transform 0.55s ease,
+              background 0.55s ease,
               opacity 0.55s ease;
 }
 

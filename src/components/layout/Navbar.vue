@@ -1,7 +1,5 @@
 <template>
-<div>
-
-</div>
+  <div></div>
 </template>
 
 <script>
@@ -54,8 +52,7 @@ export default {
       ]
     };
   },
-  created() {
-  },
+  created() {},
   methods: {
     SetMarker(position) {
       bus.$emit("Marker", position);

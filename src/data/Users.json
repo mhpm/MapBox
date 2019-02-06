@@ -1,7 +1,6 @@
-[
-    {
+[{
         "properties": {
-            "name": "Foo"
+            "name": "John"
         },
         "geometry": {
             "type": "Point",
@@ -13,7 +12,7 @@
     },
     {
         "properties": {
-            "name": "Bar"
+            "name": "Peter"
         },
         "geometry": {
             "type": "Point",
@@ -25,7 +24,7 @@
     },
     {
         "properties": {
-            "name": "Baz"
+            "name": "Jacob"
         },
         "geometry": {
             "type": "Point",
