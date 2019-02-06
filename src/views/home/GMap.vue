@@ -17,7 +17,7 @@ export default {
         lat: 20.701461,
         lng: -103.37472
       },
-      //socket: io("http://localhost:3030"),
+      socket: io("http://localhost:3030"),
       msg: "Vue Image Upload and Resize Demo",
       hasImage: false,
       image: null
@@ -25,7 +25,7 @@ export default {
   },
   beforeCreate() {},
   created() {
-    //this.SendMessage();
+    this.SendMessage();
   },
   methods: {
     setImage: function(output) {
@@ -42,25 +42,28 @@ export default {
       this.map = new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/mapbox/streets-v9",
-        center: [-65.017, -16.457],
-        zoom: 6
+        center: [-103.37627858124662, 20.704203721581877],
+        zoom: 15
       });
 
       this.LoadUsers();
 
-      // this.map.addControl(new MapboxDirections({
-      //     accessToken: mapboxgl.accessToken
-      // }), 'top-left');
-
-      // Add geolocate control to the map.
       // this.map.addControl(
-      //   new mapboxgl.GeolocateControl({
-      //     positionOptions: {
-      //       enableHighAccuracy: true
-      //     },
-      //     trackUserLocation: true
-      //   })
+      //   new MapboxDirections({
+      //     accessToken: mapboxgl.accessToken
+      //   }),
+      //   "top-left"
       // );
+
+      //Add geolocate control to the map.
+      this.map.addControl(
+        new mapboxgl.GeolocateControl({
+          positionOptions: {
+            enableHighAccuracy: true
+          },
+          trackUserLocation: true
+        })
+      );
 
       this.map.addControl(new mapboxgl.FullscreenControl());
       this.map.addControl(new mapboxgl.NavigationControl());
@@ -91,9 +94,9 @@ export default {
         el.style.width = "40px";
         el.style.height = "40px";
 
-        el.addEventListener("click", function() {
-          window.alert(user.properties.name);
-        });
+        // el.addEventListener("click", function() {
+        //   window.alert(user.properties.name);
+        // });
 
         // add marker to map
         new mapboxgl.Marker(el)
@@ -144,9 +147,9 @@ export default {
       this.FocusUser(position);
     });
 
-    // this.socket.on('LOCATION', function(data){
-    //   self.SetMarker(data)
-    // });
+    this.socket.on("LOCATION", function(data) {
+      self.SetMarker(data);
+    });
 
     setTimeout(() => {
       self.map.setLayoutProperty("country-label-lg", "text-field", [
@@ -178,11 +181,11 @@ export default {
     //   })
     // }
 
-    // let vm = this;
-    // this.map.on("click", function(e) {
-    //   new mapboxgl.Marker().setLngLat(e.lngLat).addTo(vm.map);
-    //   //vm.map.flyTo({ center: e.lngLat });
-    // });
+    this.map.on("click", function(e) {
+      //new mapboxgl.Marker().setLngLat(e.lngLat).addTo(self.map);
+      //vm.map.flyTo({ center: e.lngLat });
+      self.FocusUser(e.lngLat);
+    });
   }
 };
 </script>
